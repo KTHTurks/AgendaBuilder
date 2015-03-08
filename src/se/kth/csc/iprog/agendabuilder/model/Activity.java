@@ -13,7 +13,7 @@ public class Activity extends Observable {
 	
 	//Sanemmmmm
 	//YENÝÝÝÝÝ
-
+	//Efe Deneme
 	String name;
 	String description;	
 	
