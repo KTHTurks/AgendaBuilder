@@ -11,8 +11,7 @@ public class Activity extends Observable {
 	public static final int DISCUSSION = 3;
 	public static final int BREAK = 4;
 	
-	//Sannemmmm
-	//ÖMERRRRR
+	//Sanemmmmm 
 
 	String name;
 	String description;	
