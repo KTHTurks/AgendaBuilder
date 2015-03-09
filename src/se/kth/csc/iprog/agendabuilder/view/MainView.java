@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JLabel;
@@ -92,11 +93,12 @@ public class MainView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				AddActityPage p = new AddActityPage();
 				JFrame frame = new JFrame("Add a New Activity");
-				frame.setBounds(100, 100, 200, 400);
-				frame.setVisible(true);
-				frame.setResizable(false);
-				//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.getContentPane().add(p);
+				frame.getContentPane().setPreferredSize(new Dimension(250,400));
+
+				frame.pack();
+				frame.setVisible(true);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 		addActButton.setBounds(39, 37, 155, 23);
