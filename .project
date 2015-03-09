@@ -14,4 +14,21 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/se/kth/csc/iprog/agendabuilder/model/Activity.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/AgendaBuilder%202/src/se/kth/csc/iprog/agendabuilder/model/Activity.java</locationURI>
+		</link>
+		<link>
+			<name>src/se/kth/csc/iprog/agendabuilder/model/AgendaModel.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/AgendaBuilder%202/src/se/kth/csc/iprog/agendabuilder/model/AgendaModel.java</locationURI>
+		</link>
+		<link>
+			<name>src/se/kth/csc/iprog/agendabuilder/model/Day.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/AgendaBuilder%202/src/se/kth/csc/iprog/agendabuilder/model/Day.java</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
