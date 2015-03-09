@@ -1,6 +1,7 @@
 package se.kth.csc.iprog.agendabuilder.controller;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
@@ -17,7 +18,7 @@ import se.kth.csc.iprog.agendabuilder.view.MainViewController;
 public class AgendaMain extends JFrame {
 
 	private JPanel contentPane;
-	private static AgendaMain agendaM;
+	public static AgendaMain agendaM;
 
 	/**
 	 * Launch the application.
@@ -26,14 +27,8 @@ public class AgendaMain extends JFrame {
 	
 	public AgendaMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		setResizable(true);
-		setVisible(true);
 		setTitle("Meeting Agenda");
+		
 	}
 	
 	
@@ -51,9 +46,16 @@ public class AgendaMain extends JFrame {
 	
 	public static void main(String[] args) {
 		agendaM = new AgendaMain();
+		
 		MainView mV = new MainView();
+
+		agendaM.getContentPane().add(mV);
+
+		agendaM.getContentPane().setPreferredSize(new Dimension(900,600));
+
+		agendaM.pack();
+		agendaM.setVisible(true);
 		//MainViewController mVC = new MainViewController(agendaM,mV);
-		agendaM.add(mV);
 		
 	}
 

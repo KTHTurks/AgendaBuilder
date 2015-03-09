@@ -19,12 +19,17 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
+import se.kth.csc.iprog.agendabuilder.controller.AgendaMain;
+
 import java.awt.Canvas;
+import java.awt.SystemColor;
 
 public class MainView extends JPanel {
 	private JTextField textField;
 	public JButton addActButton;
 	public JButton addDayButton;
+	static JPanel panel;
+	static int count = 1;
 
 	/**
 	 * Create the panel.
@@ -32,53 +37,45 @@ public class MainView extends JPanel {
 	public MainView() {
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 71, 155, 362);
+		panel.setBounds(10, 71, 204, 362);
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblMin = new JLabel("10 min");
-		lblMin.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblMin.setBounds(10, 11, 46, 14);
-		panel.add(lblMin);
-
-		
-		
-		
 		JLabel lblStartTime = new JLabel("Start Time:");
 		lblStartTime.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblStartTime.setBounds(185, 47, 82, 23);
+		lblStartTime.setBounds(247, 48, 82, 23);
 		add(lblStartTime);
 		
-		textField = new JTextField(" 08:00 ");
-		textField.setBounds(261, 49, 40, 20);
+		textField = new JTextField("08:00");
+		textField.setBounds(323, 50, 63, 20);
 		add(textField);
 		textField.setColumns(10);
 		
 		JLabel label = new JLabel("End Time:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label.setBounds(185, 71, 82, 23);
+		label.setBounds(247, 72, 82, 23);
 		add(label);
 		
-		JLabel lblNewLabel = new JLabel(" 08:00 ");
+		JLabel lblNewLabel = new JLabel("08:00");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(255, 75, 46, 14);
+		lblNewLabel.setBounds(317, 76, 46, 14);
 		add(lblNewLabel);
 		
 		JLabel label_1 = new JLabel("Total Length:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_1.setBounds(185, 92, 82, 23);
+		label_1.setBounds(247, 93, 82, 23);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel(" 0 min ");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_2.setBounds(265, 97, 46, 14);
+		label_2.setBounds(327, 98, 46, 14);
 		add(label_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(185, 126, 155, 306);
+		panel_1.setBounds(247, 127, 155, 306);
 		add(panel_1);
 		
 		addDayButton = new JButton("+ Add a Day");
@@ -87,7 +84,7 @@ public class MainView extends JPanel {
 				addNewDay();
 			}
 		});
-		addDayButton.setBounds(360, 256, 120, 69);
+		addDayButton.setBounds(422, 257, 120, 69);
 		add(addDayButton);
 		
 		addActButton = new JButton("+ Add Activity");
@@ -95,14 +92,14 @@ public class MainView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				AddActityPage p = new AddActityPage();
 				JFrame frame = new JFrame("Add a New Activity");
-				frame.setBounds(100, 100, 545, 400);
+				frame.setBounds(100, 100, 200, 400);
 				frame.setVisible(true);
 				frame.setResizable(false);
 				//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.getContentPane().add(p);
 			}
 		});
-		addActButton.setBounds(10, 37, 155, 23);
+		addActButton.setBounds(39, 37, 155, 23);
 		add(addActButton);
 		
 		
@@ -112,50 +109,118 @@ public class MainView extends JPanel {
 	{
 		JLabel lblStartTime2 = new JLabel("Start Time:");
 		lblStartTime2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblStartTime2.setBounds(355, 47, 82, 23);
+		lblStartTime2.setBounds(430, 47, 82, 23);
 		add(lblStartTime2);
 		
-		JTextField textField2 = new JTextField(" 08:00 ");
-		textField2.setBounds(431, 49, 40, 20);
+		JTextField textField2 = new JTextField("08:00");
+		textField2.setBounds(506, 50, 63, 20);
 		add(textField2);
 		textField2.setColumns(10);
 		
 		JLabel label = new JLabel("End Time:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label.setBounds(355, 71, 82, 23);
+		label.setBounds(430, 71, 82, 23);
 		add(label);
 		
-		JLabel lblNewLabel = new JLabel(" 08:00 ");
+		JLabel lblNewLabel = new JLabel("08:00");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(425, 75, 46, 14);
+		lblNewLabel.setBounds(500, 75, 46, 14);
 		add(lblNewLabel);
 		
 		JLabel label_1 = new JLabel("Total Length:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_1.setBounds(355, 92, 82, 23);
+		label_1.setBounds(430, 92, 82, 23);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel(" 0 min ");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_2.setBounds(435, 97, 46, 14);
+		label_2.setBounds(510, 97, 46, 14);
 		add(label_2);
 		
 		remove(addDayButton);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(355, 126, 155, 306);
+		panel_1.setBounds(430, 126, 155, 306);
 		add(panel_1);
 		
 		addDayButton = new JButton("+ Add a Day");
-		addDayButton.setBounds(530, 256, 120, 69);
+		addDayButton.setBounds(605, 256, 120, 69);
 		add(addDayButton);
 	}
 	
 	
 	public void paintComponent(Graphics g)
 	{
-		g.repaint();
+		repaint();
+		
+	}
+	public static void addActivity(){
+		if(count == 1){
+			System.out.println("s");
+			JPanel panel_2 = new JPanel();
+			panel_2.setBounds(6, 6, 192, 32);
+			panel_2.setLayout(null);
+			panel.add(panel_2);
+			
+			JLabel lblNewLabel_1 = new JLabel("10 min");
+			lblNewLabel_1.setBounds(6, 6, 61, 16);
+			panel_2.add(lblNewLabel_1);
+			
+			JPanel panel_3 = new JPanel();
+			panel_3.setBounds(79, 0, 113, 32);
+			panel_3.setBackground(new Color(255, 250, 205));
+			panel_2.add(panel_3);
+			
+			JLabel lblNewLabel_2 = new JLabel("Presentation");
+			panel_3.add(lblNewLabel_2);
+			count ++;
+		}
+		else if(count == 2){
+
+			JPanel panel_4 = new JPanel();
+			panel_4.setLayout(null);
+			panel_4.setBounds(6, 50, 192, 32);
+			panel.add(panel_4);
+			
+			JLabel lblMin = new JLabel("30 min");
+			lblMin.setBounds(6, 6, 61, 16);
+			panel_4.add(lblMin);
+			
+			JPanel panel_5 = new JPanel();
+			panel_5.setBackground(Color.PINK);
+			panel_5.setBounds(79, 0, 113, 32);
+			panel_4.add(panel_5);
+			
+			JLabel lblStudying = new JLabel("Studying");
+			panel_5.add(lblStudying);
+			count ++;
+		}
+		else if(count == 3){
+
+			
+			JPanel panel_6 = new JPanel();
+			panel_6.setLayout(null);
+			panel_6.setBounds(6, 94, 192, 32);
+			panel.add(panel_6);
+			
+			JLabel lblMin_1 = new JLabel("15 min");
+			lblMin_1.setBounds(6, 6, 61, 16);
+			panel_6.add(lblMin_1);
+			
+			JPanel panel_7 = new JPanel();
+			panel_7.setBackground(SystemColor.textHighlight);
+			panel_7.setBounds(79, 0, 113, 32);
+			panel_6.add(panel_7);
+			
+			JLabel lblBreak = new JLabel("Break");
+			panel_7.add(lblBreak);
+			count ++;
+
+		}
+		AgendaMain.agendaM.pack();
+		AgendaMain.agendaM.setVisible(true);
+		
 		
 	}
 }

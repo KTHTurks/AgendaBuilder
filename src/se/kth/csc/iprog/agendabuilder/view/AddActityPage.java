@@ -3,9 +3,14 @@ package se.kth.csc.iprog.agendabuilder.view;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
+import javax.swing.JButton;
 
 public class AddActityPage extends JPanel {
 	private JTextField textField;
@@ -37,8 +42,11 @@ public class AddActityPage extends JPanel {
 		String[] deneme = { "Type" };
 		
 		JComboBox comboBox = new JComboBox(deneme);
+		/*comboBox.addItem("Presentation");
+		comboBox.addItem("Studying");
+		comboBox.addItem("Break");*/
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox.setBounds(10, 73, 72, 20);
+		comboBox.setBounds(10, 73, 110, 20);
 		add(comboBox);
 		
 		JTextPane txtpnDescribtion = new JTextPane();
@@ -46,6 +54,16 @@ public class AddActityPage extends JPanel {
 		txtpnDescribtion.setText("Description");
 		txtpnDescribtion.setBounds(10, 104, 181, 185);
 		add(txtpnDescribtion);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainView.addActivity();
+			}
+		});
+		btnAdd.setBounds(42, 301, 117, 29);
+		add(btnAdd);
 
 	}
 }
