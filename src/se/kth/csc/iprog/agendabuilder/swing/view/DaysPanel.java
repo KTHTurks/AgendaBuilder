@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
+import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 
 import java.awt.Dimension;
@@ -12,63 +14,71 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Observable;
 import java.util.Set;
 
-public class DaysPanel extends JPanel{
-	Set<DayPanel> days = new HashSet<DayPanel>();
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+
+public class DaysPanel extends JPanel {
+	List<DayPanel> days = new ArrayList<DayPanel>();
 	JScrollPane daysScrollPane;
+	JPanel panel;
+	JButton btnNewButton;
 	public DaysPanel() {
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(null);
+		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(300,450));
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		DayPanel dp1 = new DayPanel();
-		days.add(dp1);
-		panel.add(dp1);
 		
 		daysScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		daysScrollPane.setBounds(6, 6, 315, 463);
+		daysScrollPane.setBounds(6, 6, 300, 450);
 		add(daysScrollPane);
 		
-		
-		JButton btnNewButton = new JButton("+ Add a day ");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				DayPanel temp = new DayPanel();
-				days.add(temp);
-				
-				remove(daysScrollPane);
-				if(days.size() == 2)
-					btnNewButton.setBounds(660, 196, 117, 76);
-				panel.removeAll();
-				panel.setPreferredSize(new Dimension(310*days.size(),450));
-				panel.setLayout(new GridLayout(1,days.size(),0,0));
-				
-				for(DayPanel p : days){
-					temp = p;
-					DragSource ds = new DragSource();
-			        //ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-
-					panel.add(temp);
-				}
-
-				daysScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-				daysScrollPane.setBounds(6, 6, 615, 463);
-				add(daysScrollPane);
-				AgendaBuilder.agendaBuilder.getContentPane().setPreferredSize(new Dimension(1165,500));;
-				AgendaBuilder.agendaBuilder.pack();
-				AgendaBuilder.agendaBuilder.setVisible(true);
-				
-			}
-		});
+		btnNewButton = new JButton("+ Add a day ");
 		btnNewButton.setBounds(358, 196, 117, 76);
 		add(btnNewButton);
+	}
+	
+	public void addDay(Day d){
+		DayPanel temp = new DayPanel(d);
+		days.add(temp);
+		
+		remove(daysScrollPane);
+		if(days.size() == 2)
+			btnNewButton.setBounds(660, 196, 117, 76);
+		panel.removeAll();
+		panel.setPreferredSize(new Dimension(300*days.size(),450));
+		panel.setLayout(new GridLayout(1,days.size(),0,0));
+		
+		for(DayPanel p : days){
+			temp = p;
+			DragSource ds = new DragSource();
+	        //ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
+
+			panel.add(temp);
+		}
+
+		daysScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		int row = 1;
+		if(days.size() >= 2){
+			row = 2;
+		}
+		daysScrollPane.setBounds(6, 6, 310*row, 460);
+		add(daysScrollPane);
+		AgendaBuilder.agendaBuilder.getContentPane().setPreferredSize(new Dimension(1165,500));
+		AgendaBuilder.agendaBuilder.pack();
+		AgendaBuilder.agendaBuilder.setVisible(true);
+	}
+	
+	public void addNewDayListener(NewDayButtonActionListener dl){
+		btnNewButton.addActionListener(dl);
 	}
 
 }

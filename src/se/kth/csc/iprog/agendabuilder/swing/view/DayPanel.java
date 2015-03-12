@@ -24,7 +24,8 @@ public class DayPanel extends JPanel implements java.util.Observer{
 	JScrollPane scrollPane;
 	Day day;
 	MyDropTargetListener dropListener;
-	public DayPanel() {
+	public DayPanel(Day d) {
+		day = d;
 		setLayout(null);
 		
 		JLabel lblStartTime = new JLabel("Start Time:");
@@ -55,10 +56,10 @@ public class DayPanel extends JPanel implements java.util.Observer{
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setPreferredSize(new Dimension(257,341));
+		panel.setPreferredSize(new Dimension(257,330));
 
-		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setBounds(21, 114, 257, 341);
+		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(21, 114, 257, 330);
 		add(scrollPane);
 	}
 	
@@ -75,7 +76,7 @@ public class DayPanel extends JPanel implements java.util.Observer{
 		{
 			remove(scrollPane);
 			panel.removeAll();
-			panel.setPreferredSize(new Dimension(257,341));
+			panel.setPreferredSize(new Dimension(257,330));
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
 			dropListener.startDropListen();
 			
@@ -85,8 +86,8 @@ public class DayPanel extends JPanel implements java.util.Observer{
 				panel.add(temp);
 			}
 
-			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			scrollPane.setBounds(21, 114, 257, 341);
+			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			scrollPane.setBounds(21, 114, 257, 330);
 			add(scrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
