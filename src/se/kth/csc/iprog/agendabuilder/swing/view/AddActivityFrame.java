@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
+import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 
 import java.awt.event.MouseAdapter;
@@ -24,11 +25,10 @@ import java.awt.event.MouseEvent;
 public class AddActivityFrame extends JFrame {
 	private JTextField txtName;
 	private JTextField txtLength;
+	JComboBox comboBox;
+	JTextArea textArea;
 	public Activity activity;
-	String name;
-	String description;
-	int length;
-	int type;
+	JButton btnSave;
 	public AddActivityFrame() {
 		getContentPane().setPreferredSize(new Dimension(280,333));
 		getContentPane().setLayout(null);
@@ -49,12 +49,12 @@ public class AddActivityFrame extends JFrame {
 		lblMin.setBounds(106, 60, 61, 16);
 		getContentPane().add(lblMin);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Presentation", "Group Work", "Discussion", "Break"}));
 		comboBox.setBounds(20, 94, 134, 27);
 		getContentPane().add(comboBox);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setText("Description");
 		textArea.setBounds(30, 133, 215, 136);
 		textArea.setLineWrap(true);
@@ -65,25 +65,37 @@ public class AddActivityFrame extends JFrame {
 		btnCancel.setBounds(40, 281, 101, 29);
 		getContentPane().add(btnCancel);
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				name = txtName.getText();
-				description = textArea.getText();
-				try{
-					length = Integer.parseInt(txtLength.getText());
-				}catch(NumberFormatException ex){
-					JOptionPane.showMessageDialog(null,"Length should be an integer.");
-				}
-				type = comboBox.getSelectedIndex();
-				activity = new Activity(name,description,length,type);
-			}
-		});
+		btnSave = new JButton("Save");
 		btnSave.setBounds(144, 281, 101, 29);
 		getContentPane().add(btnSave);
 		
 		pack();
 		setVisible(true);
 	}
+	
+	public void addSaveListener(SaveButtonActionListener sb)
+	{
+		btnSave.addActionListener(sb);
+	}
+	
+	public String getName(){
+		return txtName.getText();
+	}
+	public String getDescription(){
+		return textArea.getText();
+		
+	}
+	public int getLength(){
+		try{
+			return Integer.parseInt(txtLength.getText());
+		}catch(NumberFormatException ex){
+			JOptionPane.showMessageDialog(null,"Length should be an integer.");
+			return 0;
+		}
+	}
+	public int getSelectedType(){
+		return comboBox.getSelectedIndex();
+	}
+	
+	
 }

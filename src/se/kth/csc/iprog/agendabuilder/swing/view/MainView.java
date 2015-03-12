@@ -2,6 +2,8 @@ package se.kth.csc.iprog.agendabuilder.swing.view;
 
 import javax.swing.JPanel;
 
+import se.kth.csc.iprog.agendabuilder.controller.NewActivityButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 
 public class MainView extends JPanel {
@@ -18,5 +20,13 @@ public class MainView extends JPanel {
 		DaysPanel dp = new DaysPanel();
 		dp.setBounds(330, 0, 845, 475);
 		add(dp);
+		
+		SaveButtonActionListener sb = new SaveButtonActionListener();
+		NewActivityButtonActionListener nb = new NewActivityButtonActionListener();
+		
+		nb.addModel(m);
+		nb.addView(ap);
+		ap.addNewActivityListener(nb);
+		
 	}
 }

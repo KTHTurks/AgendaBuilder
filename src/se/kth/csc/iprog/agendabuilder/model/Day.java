@@ -11,7 +11,7 @@ public class Day extends Observable {
 	 */
 	int start;
 	
-	List<Activity> activities = new ArrayList<Activity>();
+	public List<Activity> activities = new ArrayList<Activity>();
 	
 	public Day(int hour, int min) {
 		start = hour*60 + min;
@@ -28,7 +28,7 @@ public class Day extends Observable {
 	}
 
 	/**
-	 * returns the total length of the acitivities in a day in minutes
+	 * returns the total length of the activities in a day in minutes
 	 */
 	public int getTotalLength() {
 		int result = 0;
@@ -97,6 +97,7 @@ public class Day extends Observable {
 		setChanged();
 		notifyObservers("ActivityMoved");
 	}
+	
 	
 
 }
