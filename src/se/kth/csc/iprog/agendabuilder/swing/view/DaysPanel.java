@@ -13,11 +13,9 @@ import java.awt.dnd.DragSource;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
-public class DaysPanel extends JPanel implements Observer{
+public class DaysPanel extends JPanel{
 	Set<DayPanel> days = new HashSet<DayPanel>();
 	JScrollPane daysScrollPane;
 	public DaysPanel() {
@@ -71,11 +69,6 @@ public class DaysPanel extends JPanel implements Observer{
 		});
 		btnNewButton.setBounds(358, 196, 117, 76);
 		add(btnNewButton);
-	}
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

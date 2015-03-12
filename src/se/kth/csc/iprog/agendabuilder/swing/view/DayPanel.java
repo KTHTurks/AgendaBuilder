@@ -4,12 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
 
-public class DayPanel extends JPanel implements Observer{
+public class DayPanel extends JPanel {
 	private JTextField textField;
 	public DayPanel() {
 		setLayout(null);
@@ -44,11 +41,5 @@ public class DayPanel extends JPanel implements Observer{
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(21, 114, 257, 341);
 		add(panel);
-	}
-	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 }
