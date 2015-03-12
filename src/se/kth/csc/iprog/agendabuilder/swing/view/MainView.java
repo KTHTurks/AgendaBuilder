@@ -25,9 +25,11 @@ public class MainView extends JPanel {
 		SaveButtonActionListener sb = new SaveButtonActionListener();
 		NewActivityButtonActionListener nb = new NewActivityButtonActionListener(sb);
 		
-		nb.addModel(m);
+		nb.addModel(model);
 		nb.addView(ap);
 		ap.addNewActivityListener(nb);
+		
+		model.addObserver(ap);
 		
 	}
 }

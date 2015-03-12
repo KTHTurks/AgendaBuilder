@@ -9,6 +9,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 import se.kth.csc.iprog.agendabuilder.controller.NewActivityButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 
@@ -23,18 +24,19 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Observable;
 import java.util.Set;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ActivityPanel extends JPanel implements DragGestureListener, java.util.Observer {
-	Set<Activity> activities = new HashSet<Activity>();
+	List<Activity> activities = new ArrayList<Activity>();
 	JScrollPane activityScrollPane;
 	JButton btnAddActivity;
 	JPanel panel;
 	JFrame addActivityFrame;
+	SaveButtonActionListener sb;
 	boolean isOpen = false;
 	public ActivityPanel() {
 		setLayout(null);
@@ -62,9 +64,8 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 		activityScrollPane.setBounds(22, 57, 259, 399);
 		add(activityScrollPane);
 		
+		
 	}
-	
-	
 	
 	public void dragGestureRecognized(DragGestureEvent event) {
 
@@ -79,46 +80,12 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 		event.startDrag(cursor, new TransferableActivity(d));
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		if(arg.equals("ActivityParked"))
-		{
-			remove(activityScrollPane);
-			panel.removeAll();
-			int heigth = activities.size()*44;
-			int row = activities.size();
-			panel.setPreferredSize(new Dimension(237,heigth));
-			if(row == 0)
-				row = 1;
-			panel.setLayout(new GridLayout(row,heigth,0,0));
-			
-			for(Activity a : activities){
-				ActivityDisplay temp = new ActivityDisplay(a);
-				DragSource ds = new DragSource();
-		        ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-				panel.add(temp);
-			}
-
-			activityScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			int height = activities.size()*45;
-			height = Math.min(399,height);
-			activityScrollPane.setBounds(22, 57, 259, height);
-			add(activityScrollPane);
-			AgendaBuilder.agendaBuilder.pack();
-			AgendaBuilder.agendaBuilder.setVisible(true);
-		}
-		
-		
-		
-	}
+	
 	
 	public void addNewActivityListener(NewActivityButtonActionListener nb)
 	{
 		this.btnAddActivity.addActionListener(nb);
 	}
-	
-	
-	
 	
 	public static class TransferableActivity implements Transferable {
 
@@ -153,4 +120,42 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 				throw new UnsupportedFlavorException(flavor);
 		}
 	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		System.out.println(arg.getClass().toString());
+		//if(arg.equals("ActivityParked"))
+		if(arg.getClass().toString().equals("class java.util.ArrayList"))
+		{
+			System.out.println("se");
+			remove(activityScrollPane);
+			panel.removeAll();
+			activities = ((ArrayList<Activity>) arg);
+			int heigth = activities.size()*44;
+			int row = activities.size();
+			panel.setPreferredSize(new Dimension(237,heigth));
+			if(row == 0)
+				row = 1;
+			panel.setLayout(new GridLayout(row,heigth,0,0));
+
+			for(Activity a : activities){
+				System.out.println("yma");
+				ActivityDisplay temp = new ActivityDisplay(a);
+				DragSource ds = new DragSource();
+				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
+				panel.add(temp);
+			}
+
+			activityScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			int height = activities.size()*45;
+			height = Math.min(399,height);
+			activityScrollPane.setBounds(22, 57, 259, height);
+			add(activityScrollPane);
+			AgendaBuilder.agendaBuilder.pack();
+			AgendaBuilder.agendaBuilder.setVisible(true);
+		}
+
+	}
+	
 }

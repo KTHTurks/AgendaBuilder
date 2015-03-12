@@ -33,7 +33,8 @@ public class AgendaModel extends Observable {
 	public void addParkedActivity(Activity act) {
 		parkedActivites.add(act);
 		setChanged();
-		notifyObservers("ActivityParked");
+		//notifyObservers("ActivityParked");
+		notifyObservers(parkedActivites);
 	}
 	
 	/**
@@ -84,4 +85,5 @@ public class AgendaModel extends Observable {
 		
 		return model;
 	}
+	
 }

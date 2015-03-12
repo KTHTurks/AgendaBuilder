@@ -16,10 +16,11 @@ public class NewActivityButtonActionListener implements ActionListener{
 	JFrame activityFrame;
 	boolean isOpen = false;
 	
-	//SaveButtonActionListener'ý yeni frame eklemek için
+	//SaveButtonActionListener'ï¿½ yeni frame eklemek iï¿½in
 	public NewActivityButtonActionListener(SaveButtonActionListener sb)
 	{
 		this.sb= sb;
+		
 		
 	}
 	
@@ -41,7 +42,8 @@ public class NewActivityButtonActionListener implements ActionListener{
 			activityFrame.setVisible(false);		
 
 		activityFrame = new AddActivityFrame();
-		sb.addView(((AddActivityFrame) activityFrame));
+		sb.addFrame(((AddActivityFrame) activityFrame));
+		sb.addView(panel);
 		//Adding Save Button Listener
 		((AddActivityFrame) activityFrame).addSaveListener(sb);
 		isOpen = true;

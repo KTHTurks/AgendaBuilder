@@ -5,21 +5,26 @@ import java.awt.event.ActionListener;
 
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
+import se.kth.csc.iprog.agendabuilder.swing.view.ActivityPanel;
 import se.kth.csc.iprog.agendabuilder.swing.view.AddActivityFrame;
 
 public class SaveButtonActionListener implements ActionListener{
 
 	public AgendaModel model;
 	AddActivityFrame frame;
+	ActivityPanel panel;
 	
+	public void addFrame(AddActivityFrame f){
+		frame = f;
+	}
 	
 	public void addModel(AgendaModel model)
 	{
 		this.model = model;
 	}
 	
-	public void addView(AddActivityFrame f){
-		this.frame = f;
+	public void addView(ActivityPanel ap){
+		panel = ap;
 	}
 	
 	@Override
@@ -29,6 +34,7 @@ public class SaveButtonActionListener implements ActionListener{
 		int length = frame.getLength();
 		int type = frame.getSelectedType();
 		Activity activity = new Activity(name,description,length,type);
+		
 		model.addParkedActivity(activity);
 	}
 }
