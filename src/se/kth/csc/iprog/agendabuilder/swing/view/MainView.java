@@ -21,8 +21,9 @@ public class MainView extends JPanel {
 		dp.setBounds(330, 0, 845, 475);
 		add(dp);
 		
+		//New Button and Save button Listeners.
 		SaveButtonActionListener sb = new SaveButtonActionListener();
-		NewActivityButtonActionListener nb = new NewActivityButtonActionListener();
+		NewActivityButtonActionListener nb = new NewActivityButtonActionListener(sb);
 		
 		nb.addModel(m);
 		nb.addView(ap);

@@ -114,7 +114,8 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 	{
 		this.btnAddActivity.addActionListener(nb);
 	}
-
+	
+	
 	
 	
 	public static class TransferableActivity implements Transferable {
