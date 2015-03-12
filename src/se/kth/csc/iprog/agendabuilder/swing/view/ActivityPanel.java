@@ -108,6 +108,8 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			AgendaBuilder.agendaBuilder.setVisible(true);
 		}
 		
+		
+		
 	}
 	
 	public void addNewActivityListener(NewActivityButtonActionListener nb)

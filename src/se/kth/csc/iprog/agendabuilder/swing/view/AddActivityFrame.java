@@ -79,7 +79,7 @@ public class AddActivityFrame extends JFrame {
 	}
 	
 	public String getName(){
-		return txtName.getText();
+		return txtName.getText()+"";
 	}
 	public String getDescription(){
 		return textArea.getText();

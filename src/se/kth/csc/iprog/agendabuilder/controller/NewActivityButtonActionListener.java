@@ -20,11 +20,13 @@ public class NewActivityButtonActionListener implements ActionListener{
 	public NewActivityButtonActionListener(SaveButtonActionListener sb)
 	{
 		this.sb= sb;
+		
 	}
 	
 	public void addModel(AgendaModel model)
 	{
 		this.model = model;
+		sb.addModel(model);
 	}
 	
 	public void addView(ActivityPanel v){
@@ -39,6 +41,7 @@ public class NewActivityButtonActionListener implements ActionListener{
 			activityFrame.setVisible(false);		
 
 		activityFrame = new AddActivityFrame();
+		sb.addView(((AddActivityFrame) activityFrame));
 		//Adding Save Button Listener
 		((AddActivityFrame) activityFrame).addSaveListener(sb);
 		isOpen = true;
