@@ -10,7 +10,7 @@ import java.awt.FlowLayout;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-public class ActivityDisplay extends JPanel {
+public class ActivityDisplay extends JPanel  {
 	Activity activity;
 	public ActivityDisplay(Activity a) {
 		setBorder(new LineBorder(Color.LIGHT_GRAY));
