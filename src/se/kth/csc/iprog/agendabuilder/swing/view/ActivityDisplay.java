@@ -42,4 +42,9 @@ public class ActivityDisplay extends JPanel {
 		add(label);
 	}
 	
+	public Activity getActivity(){
+		
+		return activity;
+	}
+	
 }
