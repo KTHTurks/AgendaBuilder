@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import se.kth.csc.iprog.agendabuilder.controller.NewActivityButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.TextFieldListener;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 
 public class MainView extends JPanel {
@@ -26,7 +27,8 @@ public class MainView extends JPanel {
 		
 		//New Button and Save button Listeners.
 		SaveButtonActionListener sb = new SaveButtonActionListener();
-		NewActivityButtonActionListener ab = new NewActivityButtonActionListener(sb);
+		TextFieldListener tf = new TextFieldListener();
+		NewActivityButtonActionListener ab = new NewActivityButtonActionListener(sb, tf);
 		NewDayButtonActionListener db = new NewDayButtonActionListener();
 		
 		ab.addModel(model);

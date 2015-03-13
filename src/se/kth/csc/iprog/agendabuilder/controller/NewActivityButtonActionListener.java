@@ -13,14 +13,15 @@ public class NewActivityButtonActionListener implements ActionListener{
 	public AgendaModel model;
 	ActivityPanel panel;
 	SaveButtonActionListener sb;
+	TextFieldListener tf;
 	JFrame activityFrame;
 	boolean isOpen = false;
 	
 	//SaveButtonActionListener'� yeni frame eklemek i�in
-	public NewActivityButtonActionListener(SaveButtonActionListener sb)
+	public NewActivityButtonActionListener(SaveButtonActionListener sb, TextFieldListener tf)
 	{
 		this.sb= sb;
-		
+		this.tf = tf;
 		
 	}
 	
@@ -46,6 +47,7 @@ public class NewActivityButtonActionListener implements ActionListener{
 		sb.addView(panel);
 		//Adding Save Button Listener
 		((AddActivityFrame) activityFrame).addSaveListener(sb);
+		((AddActivityFrame) activityFrame).addTextFieldListener(tf);
 		isOpen = true;
 
 	}

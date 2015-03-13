@@ -29,12 +29,14 @@ public class SaveButtonActionListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String name = frame.getName();
-		String description = frame.getDescription();
-		int length = frame.getLength();
-		int type = frame.getSelectedType();
-		Activity activity = new Activity(name,description,length,type);
-		
-		model.addParkedActivity(activity);
+		if(frame.getLength() > 0){ // if the given length is valid add activity
+			String name = frame.getName();
+			String description = frame.getDescription();
+			int length = frame.getLength();
+			int type = frame.getSelectedType();
+			Activity activity = new Activity(name,description,length,type);
+			
+			model.addParkedActivity(activity);
+		}
 	}
 }

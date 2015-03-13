@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.TextFieldListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 
 import java.awt.event.MouseAdapter;
@@ -35,15 +36,18 @@ public class AddActivityFrame extends JFrame {
 		
 		txtName = new JTextField();
 		txtName.setText("Name");
+		txtName.setName("Name");
 		txtName.setBounds(20, 16, 134, 28);
 		getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
 		txtLength = new JTextField();
 		txtLength.setText("Length");
+		txtLength.setName("Length");
 		txtLength.setBounds(20, 54, 81, 28);
 		getContentPane().add(txtLength);
 		txtLength.setColumns(10);
+		
 		
 		JLabel lblMin = new JLabel("min");
 		lblMin.setBounds(106, 60, 61, 16);
@@ -77,6 +81,14 @@ public class AddActivityFrame extends JFrame {
 	{
 		btnSave.addActionListener(sb);
 	}
+	
+	public void addTextFieldListener(TextFieldListener tf)
+	{
+		txtName.addFocusListener(tf);
+		txtLength.addFocusListener(tf);
+		
+	}
+	
 	
 	public String getName(){
 		return txtName.getText()+"";
