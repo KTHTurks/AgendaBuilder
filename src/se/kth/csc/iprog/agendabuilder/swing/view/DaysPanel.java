@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
+import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
@@ -29,6 +30,8 @@ public class DaysPanel extends JPanel {
 	JScrollPane daysScrollPane;
 	JPanel panel;
 	JButton btnNewButton;
+	MyDropTargetListener mydrop;
+	
 	public DaysPanel() {
 		setLayout(null);
 		
@@ -48,6 +51,8 @@ public class DaysPanel extends JPanel {
 	
 	public void addDay(Day d){
 		DayPanel temp = new DayPanel(d);
+		mydrop.addView(temp);
+		temp.addDropListener(mydrop);
 		days.add(temp);
 		
 		remove(daysScrollPane);
@@ -80,5 +85,12 @@ public class DaysPanel extends JPanel {
 	public void addNewDayListener(NewDayButtonActionListener dl){
 		btnNewButton.addActionListener(dl);
 	}
+	
+	public void addDropListener(MyDropTargetListener mydrop)
+	{
+		this.mydrop = mydrop;
+		
+	}
+	
 
 }

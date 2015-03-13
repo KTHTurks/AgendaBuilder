@@ -57,7 +57,7 @@ public class DayPanel extends JPanel implements java.util.Observer{
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setPreferredSize(new Dimension(257,330));
-
+		
 		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(21, 114, 257, 330);
 		add(scrollPane);
@@ -69,7 +69,13 @@ public class DayPanel extends JPanel implements java.util.Observer{
 	public Day getDay(){
 		return day;
 	}
-
+	
+	public void addDropListener(MyDropTargetListener mydrop)
+	{
+		dropListener = mydrop;
+		dropListener.startDropListen();
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg.equals("ActivityAdded"))
