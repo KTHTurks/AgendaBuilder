@@ -157,7 +157,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			}
 			if(remove != null){
 				panel.remove(remove);
-				activityScrollPane.setBounds(22, 57, 259, 399);
+				activityScrollPane.setBounds(22, 57, 259, Math.min(399,(activities.size()+1)*48));
 				AgendaBuilder.agendaBuilder.pack();
 				AgendaBuilder.agendaBuilder.setVisible(true);
 			}
