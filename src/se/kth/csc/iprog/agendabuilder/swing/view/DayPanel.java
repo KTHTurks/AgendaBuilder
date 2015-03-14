@@ -12,6 +12,8 @@ import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Observer;
 import java.util.Observable;
 import java.awt.Color;
@@ -24,6 +26,10 @@ public class DayPanel extends JPanel implements java.util.Observer{
 	JScrollPane scrollPane;
 	Day day;
 	MyDropTargetListener dropListener;
+	Time time;
+	int length;
+	JLabel endTime;
+	JLabel lengthLabel;
 	public DayPanel(Day d) {
 		day = d;
 		setLayout(null);
@@ -40,19 +46,25 @@ public class DayPanel extends JPanel implements java.util.Observer{
 		lblTotalLength.setBounds(57, 86, 84, 16);
 		add(lblTotalLength);
 		
+		Time t = new Time(25200000);
 		textField = new JTextField();
-		textField.setText("08:00");
+		textField.setText("  " + t.toString().substring(0, 5));
 		textField.setBounds(139, 24, 51, 28);
 		add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("08:00");
-		lblNewLabel.setBounds(146, 58, 61, 16);
-		add(lblNewLabel);
+		//Textfield a listener eklemeyi unutma
 		
-		JLabel lblNewLabel_1 = new JLabel("0");
-		lblNewLabel_1.setBounds(146, 86, 61, 16);
-		add(lblNewLabel_1);
+		time = t;
+		
+		endTime = new JLabel(time.toString().substring(0, 5));
+		endTime.setBounds(146, 58, 61, 16);
+		add(endTime);
+		
+		length = 0;
+		lengthLabel = new JLabel(length + "  min");
+		lengthLabel.setBounds(146, 86, 61, 16);
+		add(lengthLabel);
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -85,13 +97,27 @@ public class DayPanel extends JPanel implements java.util.Observer{
 			panel.setPreferredSize(new Dimension(257,330));
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
 			dropListener.startDropListen();
-			
+			Activity b = null ;
 			for(Activity a : day.activities)
 			{	
 				ActivityDisplay temp = new ActivityDisplay(a);
 				panel.add(temp);
+				b = a;
 			}
-
+			
+			int min = b.getLength();
+			length = length + min;
+			int hour = time.getHours();
+			if(min + time.getMinutes()>=60)
+			{
+				min = min - 60;
+				hour = hour + 1;
+				time.setHours(hour);
+			}
+			time.setMinutes(min + time.getMinutes());
+			endTime.setText(time.toString().substring(0, 5));
+			lengthLabel.setText(length + "  min");
+			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(21, 114, 257, 330);
 			add(scrollPane);
