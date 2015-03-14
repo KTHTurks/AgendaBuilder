@@ -22,11 +22,23 @@ public class AgendaModel extends Observable {
 	 * add an activity to model
 	 */
 	public void addActivity(Activity act, Day day, int position) {
-		day.addActivity(act, position);
-		setChanged();
-		notifyObservers(day);
-		removeParkedActivity(parkedActivites.indexOf(act));
-		System.out.println("activity added to day AgendaModel-addActivity");
+		if(!day.activities.contains(act)){
+			day.addActivity(act, position);
+			setChanged();
+			notifyObservers(day);
+			if(parkedActivites.contains(act))
+				removeParkedActivity(parkedActivites.indexOf(act));
+			else{
+				for(Day d :days){
+					if(d.getID()!= day.getID() & d.activities.contains(act)){
+						d.removeActivity(d.activities.indexOf(act));
+						setChanged();
+						notifyObservers("ActivityRemoved");
+					}
+				}
+			}
+			System.out.println("activity added to day AgendaModel-addActivity");
+		}
 	}
 	
 	/**
@@ -71,6 +83,10 @@ public class AgendaModel extends Observable {
 		setChanged();
 		notifyObservers();
 	};
+	
+	public List<Activity> getParkedActivites(){
+		return parkedActivites;
+	}
 	
 	/**
 	 * you can use this method to create some test data and test your implementation

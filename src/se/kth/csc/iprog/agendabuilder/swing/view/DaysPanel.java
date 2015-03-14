@@ -105,6 +105,10 @@ public class DaysPanel extends JPanel implements Observer {
 				}
 			}
 			
+		}else if((arg.toString().equals("ActivityRemoved"))){
+			for(DayPanel dPanel : days){
+				dPanel.update(null, "ActivityRemoved");
+			}
 		}
 		
 	}

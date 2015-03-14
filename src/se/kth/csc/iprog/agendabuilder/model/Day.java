@@ -83,6 +83,7 @@ public class Day extends Observable {
 	 * don't call it directly
 	 */
 	Activity removeActivity(int position) {
+		System.out.println("removeActivity -- Day Model");
 		Activity act = activities.remove(position);
 		setChanged();
 		notifyObservers("ActivityRemoved");

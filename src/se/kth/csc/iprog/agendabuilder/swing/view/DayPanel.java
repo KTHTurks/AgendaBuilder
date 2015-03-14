@@ -10,15 +10,22 @@ import javax.swing.border.LineBorder;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
+import se.kth.csc.iprog.agendabuilder.swing.view.ActivityPanel.TransferableActivity;
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 
 import java.util.Observer;
 import java.util.Observable;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
 
-public class DayPanel extends JPanel implements java.util.Observer{
+public class DayPanel extends JPanel implements DragGestureListener, java.util.Observer{
 	private JTextField textField;
 	private JPanel panel;
 	JScrollPane scrollPane;
@@ -76,9 +83,23 @@ public class DayPanel extends JPanel implements java.util.Observer{
 		dropListener.startDropListen();
 	}
 	
+	public void dragGestureRecognized(DragGestureEvent event) {
+
+		Cursor cursor = null;
+		JPanel panel = (JPanel) event.getComponent();
+
+		Activity d = ((ActivityDisplay) panel).getActivity();
+		if (event.getDragAction() == DnDConstants.ACTION_COPY) {
+			cursor = DragSource.DefaultCopyDrop;
+		}
+
+		event.startDrag(cursor, new TransferableActivity(d));
+	}
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg.equals("ActivityAdded"))
+		if(arg.equals("ActivityAdded") )
 		{
 			remove(scrollPane);
 			panel.removeAll();
@@ -89,6 +110,8 @@ public class DayPanel extends JPanel implements java.util.Observer{
 			for(Activity a : day.activities)
 			{	
 				ActivityDisplay temp = new ActivityDisplay(a);
+				DragSource ds = new DragSource();
+				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
 				panel.add(temp);
 			}
 
@@ -97,7 +120,30 @@ public class DayPanel extends JPanel implements java.util.Observer{
 			add(scrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
-		}
 		
+		
+		}
+		if(arg.equals("ActivityRemoved")){
+			boolean exists;
+			Component remove = null;
+			System.out.println("ActivityRemoved !! DayPAnel-Update");
+			for(Component c : panel.getComponents())
+			{	
+				exists = false;
+				if(c instanceof ActivityDisplay){
+					for(Activity a : day.activities){
+						if(((ActivityDisplay)c).getID() == a.getID()){
+							exists = true;
+							break;
+						}
+					}
+					if(!exists){
+						System.out.println("Found !! DayPAnel-Update");
+						c.setVisible(false);
+						panel.remove(c);
+					}
+				}
+			}	
+		}
 	}
 }
