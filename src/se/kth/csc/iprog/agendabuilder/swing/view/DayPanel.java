@@ -41,6 +41,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		day = d;
 		setLayout(null);
 		
+		
+		
 		JLabel lblStartTime = new JLabel("Start Time:");
 		lblStartTime.setBounds(57, 30, 84, 16);
 		add(lblStartTime);
@@ -119,6 +121,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
 			dropListener.startDropListen();
 			Activity b = null ;
+			
 			for(Activity a : day.activities)
 			{	
 				ActivityDisplay temp = new ActivityDisplay(a);
@@ -127,6 +130,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				panel.add(temp);
 				b = a;
 			}
+			
+			
 			
 			int min = b.getLength();
 			length = length + min;
@@ -146,6 +151,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			add(scrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
+			timeColor();
 		
 		
 		}
@@ -168,6 +174,59 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 					}
 				}
 			}	
+		}
+	}
+	
+	public void timeColor()
+	{
+		int actNumForBlue = 0;
+		int actNumForGreen = 0;
+		int actNumForRed = 0;
+		int actNumForYellow = 0;
+		for(Activity a : day.activities)
+		{	
+			if(a.getType() == Activity.PRESENTATION)
+			{
+				actNumForBlue = 1;
+			}
+			else if(a.getType() == Activity.GROUP_WORK)
+			{
+				actNumForGreen = 1;
+			}
+			else if(a.getType() == Activity.DISCUSSION)
+			{
+				actNumForRed = 1;
+			}
+			else if(a.getType() == Activity.BREAK)
+			{
+				actNumForYellow = 1;
+			}
+		}
+		//System.out.println(actNumForBlue + " " + actNumForGreen + " " + actNumForRed + " " + actNumForYellow);
+		int sum = actNumForBlue + actNumForGreen + actNumForRed + actNumForYellow;
+		
+		if(sum == 3)
+		{
+			/*JPanel colorPanel = new JPanel();
+			colorPanel.setBounds(200, 24, 60, 80);
+			colorPanel.setBackground(Color.blue);
+			add(colorPanel);*/
+		}
+		else if(sum == 2)
+		{
+			
+		}
+		else if(sum == 1)
+		{
+		
+		}
+		else if(sum == 0)
+		{
+			/*System.out.println("Burda");
+			JPanel colorPanel = new JPanel();
+			colorPanel.setBounds(2000, 60, 100, 80);
+			colorPanel.setBackground(Color.black);
+			add(colorPanel);*/
 		}
 	}
 }
