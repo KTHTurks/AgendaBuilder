@@ -124,11 +124,11 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		System.out.println(arg.getClass().toString());
+		//System.out.println(arg.getClass().toString());
 		//if(arg.equals("ActivityParked"))
-		if(arg.getClass().toString().equals("class java.util.ArrayList"))
+		if(arg instanceof ArrayList )
 		{
-			System.out.println("se");
+			//System.out.println("se");
 			remove(activityScrollPane);
 			panel.removeAll();
 			activities = ((ArrayList<Activity>) arg);
@@ -154,6 +154,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			add(activityScrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
+		
 		}
 
 	}

@@ -25,6 +25,7 @@ public class AgendaModel extends Observable {
 		day.addActivity(act, position);
 		setChanged();
 		notifyObservers(day);
+		removeParkedActivity(parkedActivites.indexOf(act));
 		System.out.println("activity added to day AgendaModel-addActivity");
 	}
 	
@@ -44,7 +45,7 @@ public class AgendaModel extends Observable {
 	public Activity removeParkedActivity(int position) {
 		Activity act =  parkedActivites.remove(position);
 		setChanged();
-		notifyObservers("ParkedActivityRemoved");
+		notifyObservers(parkedActivites);
 		return act;
 	}
 	
