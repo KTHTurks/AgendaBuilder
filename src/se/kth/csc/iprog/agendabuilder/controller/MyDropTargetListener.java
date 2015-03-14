@@ -6,10 +6,9 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
 
-import javax.swing.JPanel;
-
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
+import se.kth.csc.iprog.agendabuilder.swing.view.ActivityPanel;
 import se.kth.csc.iprog.agendabuilder.swing.view.DayPanel;
 import se.kth.csc.iprog.agendabuilder.swing.view.ActivityPanel.TransferableActivity;
 
@@ -19,6 +18,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
 	DayPanel dp;
 
 	private DropTarget dropTarget;
+	private DropTarget parkedTarget;
 
 	public MyDropTargetListener() {
 	}
@@ -26,6 +26,11 @@ public class MyDropTargetListener extends DropTargetAdapter {
 	public void startDropListen()
 	{
 		dropTarget = new DropTarget(dp.getPanel(), DnDConstants.ACTION_COPY, 
+				this, true, null);
+	}
+	
+	public void startParkedDropListen(ActivityPanel a){
+		parkedTarget = new DropTarget(a, DnDConstants.ACTION_COPY, 
 				this, true, null);
 	}
 	
@@ -46,11 +51,14 @@ public class MyDropTargetListener extends DropTargetAdapter {
 			Activity activity = (Activity) tr.getTransferData(TransferableActivity.activityFlavor);
 
 			if (event.isDataFlavorSupported(TransferableActivity.activityFlavor)) {
-
 				event.acceptDrop(DnDConstants.ACTION_COPY);
-				m.addActivity(activity, dp.getDay(), dp.getDay().activities.size());
-				event.dropComplete(true);
-				
+				if(event.getSource() == dropTarget){
+					m.addActivity(activity, dp.getDay(), dp.getDay().activities.size());
+					event.dropComplete(true);
+				}else if(event.getSource() == parkedTarget){
+					m.addParkedActivity(activity);
+					event.dropComplete(true);
+				}
 				return;
 			}
 			event.rejectDrop();

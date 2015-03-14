@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewActivityButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
@@ -38,6 +39,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 	JPanel panel;
 	JFrame addActivityFrame;
 	SaveButtonActionListener sb;
+	MyDropTargetListener dropListener;
 	boolean isOpen = false;
 	public ActivityPanel() {
 		setLayout(null);
@@ -69,7 +71,11 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 		event.startDrag(cursor, new TransferableActivity(d));
 	}
 	
-	
+	public void addDropListener(MyDropTargetListener mydrop)
+	{
+		dropListener = mydrop;
+		dropListener.startParkedDropListen(this);
+	}
 	
 	public void addNewActivityListener(NewActivityButtonActionListener nb)
 	{
@@ -125,6 +131,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			int heigth = activities.size()*44;
 			int row = activities.size();
 			panel.setPreferredSize(new Dimension(237,heigth));
+			dropListener.startDropListen();
 			if(row == 0)
 				row = 1;
 			panel.setLayout(new GridLayout(row,heigth,0,0));

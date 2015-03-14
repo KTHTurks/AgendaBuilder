@@ -152,7 +152,6 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		if(arg.equals("ActivityRemoved")){
 			boolean exists;
 			Component remove = null;
-			System.out.println("ActivityRemoved !! DayPAnel-Update");
 			for(Component c : panel.getComponents())
 			{	
 				exists = false;
@@ -164,7 +163,6 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 						}
 					}
 					if(!exists){
-						System.out.println("Found !! DayPAnel-Update");
 						c.setVisible(false);
 						panel.remove(c);
 					}

@@ -98,7 +98,6 @@ public class DaysPanel extends JPanel implements Observer {
 		// TODO Auto-generated method stub
 		
 		if(arg instanceof Day){
-			System.out.println("DaysPanel notified DaysPanel-update");
 			for(DayPanel dPanel : days){
 				if(((Day)arg).getID() == dPanel.getDay().getID()){
 					dPanel.update(dPanel.getDay(), "ActivityAdded");

@@ -37,7 +37,6 @@ public class AgendaModel extends Observable {
 					}
 				}
 			}
-			System.out.println("activity added to day AgendaModel-addActivity");
 		}
 	}
 	
@@ -46,8 +45,14 @@ public class AgendaModel extends Observable {
 	 */
 	public void addParkedActivity(Activity act) {
 		parkedActivites.add(act);
+		for(Day d :days){
+			if(d.activities.contains(act)){
+				d.removeActivity(d.activities.indexOf(act));
+				setChanged();
+				notifyObservers("ActivityRemoved");
+			}
+		}
 		setChanged();
-		//notifyObservers("ActivityParked");
 		notifyObservers(parkedActivites);
 	}
 	
