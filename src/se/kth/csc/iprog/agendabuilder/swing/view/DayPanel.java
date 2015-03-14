@@ -222,11 +222,11 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		}
 		else if(sum == 0)
 		{
-			/*System.out.println("Burda");
+			System.out.println("Burda");
 			JPanel colorPanel = new JPanel();
-			colorPanel.setBounds(2000, 60, 100, 80);
+			colorPanel.setBounds(190, 30, 100, 80);
 			colorPanel.setBackground(Color.black);
-			add(colorPanel);*/
+			add(colorPanel);
 		}
 	}
 }
