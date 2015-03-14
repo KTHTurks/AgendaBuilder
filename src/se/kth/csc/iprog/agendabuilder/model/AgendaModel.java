@@ -45,7 +45,7 @@ public class AgendaModel extends Observable {
 	public Activity removeParkedActivity(int position) {
 		Activity act =  parkedActivites.remove(position);
 		setChanged();
-		notifyObservers(parkedActivites);
+		notifyObservers(act);
 		return act;
 	}
 	

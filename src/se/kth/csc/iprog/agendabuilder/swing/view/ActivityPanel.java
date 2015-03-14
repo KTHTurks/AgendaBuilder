@@ -14,6 +14,7 @@ import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -40,19 +41,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 	boolean isOpen = false;
 	public ActivityPanel() {
 		setLayout(null);
-		/*
-		activities.add(new Activity("Introduction","Intro to the meeting",10,0));
-		activities.add(new Activity("Idea 1","Presenting idea 1",30,0));
-		activities.add(new Activity("Working in groups","Working on business model for idea 1",35,1));
-		activities.add(new Activity("Idea 1 discussion","Discussing the results of idea 1",15,2));
-		activities.add(new Activity("Coffee break","Time for some coffee",20,3));
-		activities.add(new Activity("Working in groups","Working on business model for idea 1",35,1));
-		activities.add(new Activity("Idea 1 discussion","Discussing the results of idea 1",15,2));
-		activities.add(new Activity("Coffee break","Time for some coffee",20,3));
-		activities.add(new Activity("Working in groups","Working on business model for idea 1",35,1));
-		activities.add(new Activity("Idea 1 discussion","Discussing the results of idea 1",15,2));
-		activities.add(new Activity("Coffee break","Time for some coffee",20,3));
-		*/
+		
 		btnAddActivity = new JButton("Add Activity");
 		btnAddActivity.setBounds(78, 18, 146, 29);
 		add(btnAddActivity);
@@ -131,6 +120,7 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			//System.out.println("se");
 			remove(activityScrollPane);
 			panel.removeAll();
+			this.remove(activityScrollPane);
 			activities = ((ArrayList<Activity>) arg);
 			int heigth = activities.size()*44;
 			int row = activities.size();
@@ -154,7 +144,25 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			add(activityScrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
-		
+			
+		}else if(arg instanceof Activity){
+			
+			Component remove = null;
+			for(Component c : panel.getComponents()){
+				if(c instanceof ActivityDisplay & ((ActivityDisplay)c).getID() == ((Activity)arg).getID()){
+					c.setVisible(false);
+					remove = c;
+					break;
+				}
+			}
+			if(remove != null){
+				panel.remove(remove);
+				activityScrollPane.setBounds(22, 57, 259, 399);
+				AgendaBuilder.agendaBuilder.pack();
+				AgendaBuilder.agendaBuilder.setVisible(true);
+			}
+			
+			
 		}
 
 	}

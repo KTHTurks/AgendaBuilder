@@ -11,23 +11,28 @@ public class Activity extends Observable {
 	public static final int DISCUSSION = 3;
 	public static final int BREAK = 4;
 	
+	public static int idcounter=0;
 
 	String name;
 	String description;	
 	
 	int length; //in minutes
 	int type;
-	
+	private int id;
 	
 	public Activity(String name, String description, int length, int type) {
 		this.name = name;
 		this.description = description;
 		this.length = length;
 		this.type = type;
+		id = idcounter++;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	public int getID(){
+		return id;
 	}
 	
 	public void setName(String name) {
