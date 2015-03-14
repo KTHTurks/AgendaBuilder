@@ -24,6 +24,7 @@ public class MainView extends JPanel {
 		dp.setBounds(330, 0, 845, 475);
 		add(dp);
 		model.addObserver(ap);
+		model.addObserver(dp);
 		
 		
 		//New Button and Save button Listeners.

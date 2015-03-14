@@ -24,8 +24,8 @@ public class AgendaModel extends Observable {
 	public void addActivity(Activity act, Day day, int position) {
 		day.addActivity(act, position);
 		setChanged();
-		notifyObservers("ActivityAddedToDay");
-		System.out.println("activity added to day");
+		notifyObservers(day);
+		System.out.println("activity added to day AgendaModel-addActivity");
 	}
 	
 	/**

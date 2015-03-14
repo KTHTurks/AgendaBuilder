@@ -19,13 +19,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 
-public class DaysPanel extends JPanel {
+public class DaysPanel extends JPanel implements Observer {
 	List<DayPanel> days = new ArrayList<DayPanel>();
 	JScrollPane daysScrollPane;
 	JPanel panel;
@@ -89,6 +90,22 @@ public class DaysPanel extends JPanel {
 	public void addDropListener(MyDropTargetListener mydrop)
 	{
 		this.mydrop = mydrop;
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+		if(arg instanceof Day){
+			System.out.println("DaysPanel notified DaysPanel-update");
+			for(DayPanel dPanel : days){
+				if(((Day)arg).getID() == dPanel.getDay().getID()){
+					dPanel.update(dPanel.getDay(), "ActivityAdded");
+				}
+			}
+			
+		}
 		
 	}
 	

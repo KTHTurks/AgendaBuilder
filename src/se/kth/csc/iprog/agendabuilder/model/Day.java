@@ -10,15 +10,21 @@ public class Day extends Observable {
 	 * the start of the agenda in min, counted from midnight
 	 */
 	int start;
-	
+	static int idcounter = 0;
+	private int id;
 	public List<Activity> activities = new ArrayList<Activity>();
 	
 	public Day(int hour, int min) {
 		start = hour*60 + min;
+		id = idcounter++;
 	}
 
 	public int getStart() {
 		return start;
+	}
+	
+	public int getID() {
+		return id;
 	}
 
 	public void setStart(int start) {
