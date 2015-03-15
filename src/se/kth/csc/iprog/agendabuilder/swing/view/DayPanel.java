@@ -82,14 +82,15 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setPreferredSize(new Dimension(257,330));
+		panel.setPreferredSize(new Dimension(257, 10));
 		
 		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		scrollPane.setBounds(21, 114, 257, 330);
 		add(scrollPane);
 		
 		colorPanel = new JPanel();
-		colorPanel.setBounds(195, 25, 100, 80);
+		colorPanel.setBounds(212, 25, 67, 80);
 		colorPanel.setLayout(null);
 		add(colorPanel);
 		
@@ -146,7 +147,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		{
 			remove(scrollPane);
 			panel.removeAll();
-			panel.setPreferredSize(new Dimension(257,330));
+			//panel.setPreferredSize(new Dimension(257,330));
+			panel.setPreferredSize(new Dimension(257,day.activities.size()*48));
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
 			dropListener = new MyDropTargetListener(dropListener);
 			dropListener.addView(this);
@@ -179,7 +181,11 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			lengthLabel.setText(length + "  min");
 			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(21, 114, 257, 330);
+			int height = day.activities.size()*52;
+			height = Math.min(330,height);
+			if(height == 0)
+				height = 330;
+			scrollPane.setBounds(21, 114, 257, height);
 			add(scrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);

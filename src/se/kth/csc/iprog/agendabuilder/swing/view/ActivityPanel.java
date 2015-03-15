@@ -123,7 +123,6 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 		//if(arg.equals("ActivityParked"))
 		if(arg instanceof ArrayList || arg instanceof Activity)
 		{
-			//System.out.println("se");
 			remove(activityScrollPane);
 			panel.removeAll();
 			this.remove(activityScrollPane);
@@ -138,7 +137,6 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			panel.setLayout(new GridLayout(row,heigth,0,0));
 
 			for(Activity a : activities){
-				//System.out.println("yma");
 				ActivityDisplay temp = new ActivityDisplay(a);
 				DragSource ds = new DragSource();
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
@@ -146,9 +144,9 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			}
 
 			activityScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			int height = activities.size()*48;
+			int height = activities.size()*52;
 			height = Math.min(399,height);
-			activityScrollPane.setBounds(22, 57, 259, height);
+			activityScrollPane.setBounds(22, 57, 257, height);
 			add(activityScrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);

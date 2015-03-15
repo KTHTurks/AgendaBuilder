@@ -37,7 +37,7 @@ public class ActivityDisplay extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.DARK_GRAY));
 		panel.setBackground(c);
-		panel.setBounds(62, 0, 196, 44);
+		panel.setBounds(62, 0, 193, 44);
 		panel.setName(Integer.toString(id));
 		add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 12, 12));
@@ -52,7 +52,7 @@ public class ActivityDisplay extends JPanel {
 		label.setName(Integer.toString(id));
 		add(label);
 		
-		setBounds(62, 0, 196, 44);
+		setBounds(62, 0, 255, 44);
 		
 	}
 	
