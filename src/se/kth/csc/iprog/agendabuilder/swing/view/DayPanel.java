@@ -93,7 +93,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	
 	public void addDropListener(MyDropTargetListener mydrop)
 	{
-		dropListener = mydrop;
+		dropListener = new MyDropTargetListener(mydrop);
 		dropListener.startDropListen();
 	}
 	

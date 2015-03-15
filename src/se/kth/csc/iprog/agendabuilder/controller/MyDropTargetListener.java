@@ -23,6 +23,12 @@ public class MyDropTargetListener extends DropTargetAdapter {
 	public MyDropTargetListener() {
 	}
 	
+	public MyDropTargetListener(MyDropTargetListener dl)
+	{
+		this.m = dl.m;
+		this.dp = dl.dp;
+	}
+	
 	public void startDropListen()
 	{
 		dropTarget = new DropTarget(dp.getPanel(), DnDConstants.ACTION_COPY, 
