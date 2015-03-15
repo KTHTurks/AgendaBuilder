@@ -46,8 +46,9 @@ public class MainView extends JPanel {
 		
 		
 		//Adding the first day
-		dp.addDay(model.addDay(8, 10));
+		
 		ap.addDropListener(myDrop);
+		dp.addDay(model.addDay(8, 10));
 		
 	}
 }
