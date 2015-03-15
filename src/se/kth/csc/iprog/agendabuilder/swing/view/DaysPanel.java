@@ -54,7 +54,10 @@ public class DaysPanel extends JPanel implements Observer {
 	public void addDay(Day d){
 		DayPanel temp = new DayPanel(d);
 		mydrop.addView(temp);
-		temp.addDropListener(mydrop);
+		MyDropTargetListener tempList= new MyDropTargetListener(mydrop);
+		tempList.addView(temp);
+		temp.addDropListener(tempList);
+		
 		days.add(temp);
 		
 		remove(daysScrollPane);
@@ -68,7 +71,9 @@ public class DaysPanel extends JPanel implements Observer {
 			temp = p;
 			DragSource ds = new DragSource();
 	        //ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-
+			tempList= new MyDropTargetListener(mydrop);
+			tempList.addView(temp);
+			temp.addDropListener(tempList);
 			panel.add(temp);
 		}
 

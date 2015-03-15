@@ -119,6 +119,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			panel.removeAll();
 			panel.setPreferredSize(new Dimension(257,330));
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
+			dropListener = new MyDropTargetListener(dropListener);
+			dropListener.addView(this);
 			dropListener.startDropListen();
 			Activity b = null ;
 			
