@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 

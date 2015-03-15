@@ -64,6 +64,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
 				}else if(event.getSource() == parkedTarget){
 					if(!m.getParkedActivites().contains(activity)){
 						m.addParkedActivity(activity);
+						
 						event.dropComplete(true);
 					}
 					

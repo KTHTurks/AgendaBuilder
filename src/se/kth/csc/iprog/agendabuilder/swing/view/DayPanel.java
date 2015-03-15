@@ -113,7 +113,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg.equals("ActivityAdded") )
+		if(arg.equals("ActivityAdded") || arg.equals("ActivityRemoved") )
 		{
 			remove(scrollPane);
 			panel.removeAll();
@@ -132,20 +132,23 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			}
 			
 			
-			
-			int min = b.getLength();
-			length = length + min;
-			int hour = time.getHours();
-			if(min + time.getMinutes()>=60)
-			{
-				min = min - 60;
-				hour = hour + 1;
-				time.setHours(hour);
+			if(b != null){
+				int min = b.getLength();
+				length = length + min;
+				int hour = time.getHours();
+				if(min + time.getMinutes()>=60)
+				{
+					min = min - 60;
+					hour = hour + 1;
+					time.setHours(hour);
+				}
+				time.setMinutes(min + time.getMinutes());
+				endTime.setText(time.toString().substring(0, 5));
+				lengthLabel.setText(length + "  min");
+			} else {
+				endTime.setText(textField.getText());
+				lengthLabel.setText("0 min");
 			}
-			time.setMinutes(min + time.getMinutes());
-			endTime.setText(time.toString().substring(0, 5));
-			lengthLabel.setText(length + "  min");
-			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(21, 114, 257, 330);
 			add(scrollPane);
@@ -154,7 +157,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			timeColor();
 		
 		
-		}
+		}/*
 		if(arg.equals("ActivityRemoved")){
 			boolean exists;
 			Component remove = null;
@@ -174,7 +177,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 					}
 				}
 			}	
-		}
+		}*/
 	}
 	
 	public void timeColor()

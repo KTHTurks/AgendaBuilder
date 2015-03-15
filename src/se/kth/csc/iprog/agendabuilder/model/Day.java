@@ -83,7 +83,7 @@ public class Day extends Observable {
 	 * this method will be called when needed from the model
 	 * don't call it directly
 	 */
-	Activity removeActivity(int position) {
+	public Activity removeActivity(int position) {
 		Activity act = activities.remove(position);
 		setChanged();
 		notifyObservers("ActivityRemoved");
@@ -104,8 +104,7 @@ public class Day extends Observable {
 		setChanged();
 		notifyObservers("ActivityMoved");
 	}
-	
-	
+		
 
 }
 

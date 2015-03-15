@@ -40,6 +40,15 @@ public class AgendaModel extends Observable {
 		}
 	}
 	
+	public void removeActivity(Activity act){
+		for(Day d: days){
+			if(d.activities.contains(act)){
+				d.removeActivity(d.activities.indexOf(act));
+			}
+		}
+	}
+	
+	
 	/**
 	 * add an activity to parked activities
 	 */
