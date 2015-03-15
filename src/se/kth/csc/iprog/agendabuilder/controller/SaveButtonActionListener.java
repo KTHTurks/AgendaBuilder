@@ -33,7 +33,8 @@ public class SaveButtonActionListener implements ActionListener{
 			String name = frame.getName();
 			String description = frame.getDescription();
 			int length = frame.getLength();
-			int type = frame.getSelectedType();
+			int type = frame.getSelectedType() +1;
+			//System.out.println("Activity type " + type + " SaveButton -- actionperformed");
 			Activity activity = new Activity(name,description,length,type);
 			
 			model.addParkedActivity(activity);

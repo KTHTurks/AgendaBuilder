@@ -1,5 +1,7 @@
 package se.kth.csc.iprog.agendabuilder.swing.view;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
@@ -11,7 +13,7 @@ import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 
 public class MainView extends JPanel {
 	AgendaModel model;
-	
+	public static Color background = Color.lightGray;
 	public MainView(AgendaModel m){
 		model = m;
 		

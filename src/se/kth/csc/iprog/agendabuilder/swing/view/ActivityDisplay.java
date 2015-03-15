@@ -14,6 +14,11 @@ import javax.swing.border.LineBorder;
 public class ActivityDisplay extends JPanel {
 	Activity activity;
 	private int id;
+	public static final  Color colorType1 = new Color(173, 216, 230);
+	public static final  Color colorType2 = new Color(255, 228, 225);
+	public static final  Color colorType3 = new Color(255, 248, 220);
+	public static final  Color colorType4 = new Color(153, 204, 153);
+	
 	public ActivityDisplay(Activity a) {
 		setBorder(new LineBorder(Color.LIGHT_GRAY));
 		activity = a;
@@ -21,13 +26,13 @@ public class ActivityDisplay extends JPanel {
 		setLayout(null);
 		Color c;
 		if(activity.getType() == 1)
-			c = new Color(173, 216, 230);
+			c = colorType1;
 		else if(activity.getType() == 2)
-			c = new Color(255, 228, 225);
+			c = colorType2;
 		else if(activity.getType() == 3)
-			c = new Color(255, 248, 220);
+			c = colorType3;
 		else
-			c = new Color(153, 204, 153);
+			c = colorType4;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.DARK_GRAY));

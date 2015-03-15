@@ -37,6 +37,11 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	int length;
 	JLabel endTime;
 	JLabel lengthLabel;
+	JPanel colorPanel;
+	JPanel colorP_Type1;
+	JPanel colorP_Type2;
+	JPanel colorP_Type3;
+	JPanel colorP_Type4;
 	public DayPanel(Day d) {
 		day = d;
 		setLayout(null);
@@ -82,6 +87,36 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(21, 114, 257, 330);
 		add(scrollPane);
+		
+		colorPanel = new JPanel();
+		colorPanel.setBounds(195, 25, 100, 80);
+		//colorPanel.setBackground(MainView.background);
+		colorPanel.setLayout(null);
+		add(colorPanel);
+		
+		colorP_Type1 = new JPanel();
+		colorP_Type1.setBackground(ActivityDisplay.colorType1);
+		//colorType1.setVisible(false);
+		//colorType1.setBounds(0, 0, 30, 30);
+		colorPanel.add(colorP_Type1);
+		
+		colorP_Type2 = new JPanel();
+		colorP_Type2.setBackground(ActivityDisplay.colorType2);
+		//colorType2.setVisible(false);
+		colorPanel.add(colorP_Type2);
+		
+		colorP_Type3 = new JPanel();
+		colorP_Type3.setBackground(ActivityDisplay.colorType3);
+		//colorType3.setVisible(false);
+		colorPanel.add(colorP_Type3);
+		
+		colorP_Type4 = new JPanel();
+		colorP_Type4.setBackground(ActivityDisplay.colorType4);
+		//colorType4.setVisible(false);
+		colorPanel.add(colorP_Type4);
+		
+		
+		
 	}
 	
 	public JPanel getPanel(){
@@ -155,7 +190,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
 			timeColor();
-		
+			repaint();
 		
 		}
 		
@@ -163,54 +198,51 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	
 	public void timeColor()
 	{
-		int actNumForBlue = 0;
-		int actNumForGreen = 0;
-		int actNumForRed = 0;
-		int actNumForYellow = 0;
+		double timeType1 = 0;
+		double timeType2 = 0;
+		double timeType3 = 0;
+		double timeType4 = 0;
 		for(Activity a : day.activities)
 		{	
 			if(a.getType() == Activity.PRESENTATION)
 			{
-				actNumForBlue = 1;
+				timeType1 += a.getLength();
 			}
 			else if(a.getType() == Activity.GROUP_WORK)
 			{
-				actNumForGreen = 1;
+				timeType2 += a.getLength();
 			}
 			else if(a.getType() == Activity.DISCUSSION)
 			{
-				actNumForRed = 1;
+				timeType3 += a.getLength();
 			}
 			else if(a.getType() == Activity.BREAK)
 			{
-				actNumForYellow = 1;
+				timeType4 += a.getLength();
 			}
 		}
-		//System.out.println(actNumForBlue + " " + actNumForGreen + " " + actNumForRed + " " + actNumForYellow);
-		int sum = actNumForBlue + actNumForGreen + actNumForRed + actNumForYellow;
+		System.out.println(" Type1 time " + timeType1+ " Type2 time " + timeType2+ " Type3 time " + timeType3+ " Type4 time " + timeType4 );
+		double sum = timeType1 + timeType2 + timeType3 + timeType4 ;
+		System.out.println("----sum " + sum + " coloePanel height " + colorPanel.getHeight());
+		if(sum >0){
+			timeType1 = (timeType1/sum) * colorPanel.getHeight();
+			timeType2 = (timeType2/sum) * colorPanel.getHeight();
+			timeType3 = (timeType3/sum) * colorPanel.getHeight();
+			timeType4 = (timeType4/sum) * colorPanel.getHeight();
+		}
 		
-		if(sum == 3)
-		{
-			/*JPanel colorPanel = new JPanel();
-			colorPanel.setBounds(200, 24, 60, 80);
-			colorPanel.setBackground(Color.blue);
-			add(colorPanel);*/
-		}
-		else if(sum == 2)
-		{
-			
-		}
-		else if(sum == 1)
-		{
+		System.out.println("******* Type1 time " + timeType1+ " Type2 time " + timeType2+ " Type3 time " + timeType3+ " Type4 time " + timeType4 );
+		int width = colorPanel.getWidth();
 		
-		}
-		else if(sum == 0)
-		{
-			System.out.println("Burda");
-			JPanel colorPanel = new JPanel();
-			colorPanel.setBounds(190, 30, 100, 80);
-			colorPanel.setBackground(Color.black);
-			add(colorPanel);
-		}
+		colorP_Type1.setBounds(0, 0, width, (int)timeType1);
+		colorP_Type2.setBounds(0, (int)timeType1, width, (int)timeType2);
+		colorP_Type3.setBounds(0, (int)(timeType1+ timeType2), width, (int)timeType3);
+		colorP_Type4.setBounds(0, (int)(timeType1+ timeType2+ timeType3), width, (int)timeType4);
+		
+		colorP_Type1.setVisible((timeType1 > 0));
+		colorP_Type2.setVisible((timeType2 > 0));
+		colorP_Type3.setVisible((timeType3 > 0));
+		colorP_Type4.setVisible((timeType4 > 0));
+		
 	}
 }
