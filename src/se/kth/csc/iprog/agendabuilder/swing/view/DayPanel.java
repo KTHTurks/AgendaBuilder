@@ -1,5 +1,6 @@
 package se.kth.csc.iprog.agendabuilder.swing.view;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -26,6 +27,8 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DayPanel extends JPanel implements DragGestureListener, java.util.Observer{
 	private JTextField textField;
@@ -33,8 +36,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	JScrollPane scrollPane;
 	Day day;
 	MyDropTargetListener dropListener;
-	Time time;
-	int length;
+	static Time time = new Time(25200000);
+	static int length;
 	JLabel endTime;
 	JLabel lengthLabel;
 	JPanel colorPanel;
@@ -62,14 +65,35 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		
 		Time t = new Time(25200000);
 		textField = new JTextField();
-		textField.setText("  " + t.toString().substring(0, 5));
+		textField.setText(t.toString().substring(0, 5));
 		textField.setBounds(139, 24, 51, 28);
 		add(textField);
 		textField.setColumns(10);
 		
-		//Textfield a listener eklemeyi unutma
-		
-		time = t;
+		textField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				if(Integer.parseInt(textField.getText().substring(0, 2)) <= 24 
+						&& Integer.parseInt(textField.getText().substring(0, 2)) >= 00
+						&& Integer.parseInt(textField.getText().substring(3, 5)) <= 60
+						&& Integer.parseInt(textField.getText().substring(3, 5)) >= 00)
+				{
+					textField.setText(textField.getText());
+					int minDiff = time.getMinutes() - t.getMinutes();
+					int hourDiff = time.getHours() - t.getHours();
+					t.setHours(Integer.parseInt(textField.getText().substring(0, 2)));
+					t.setMinutes(Integer.parseInt(textField.getText().substring(3, 5)));
+					time.setHours(t.getHours() + hourDiff);
+					time.setMinutes(t.getMinutes() + minDiff);
+					endTime.setText(time.toString().substring(0, 5));
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null,"Time must be valid");
+				}
+			}
+		});
 		
 		endTime = new JLabel(time.toString().substring(0, 5));
 		endTime.setBounds(146, 58, 61, 16);

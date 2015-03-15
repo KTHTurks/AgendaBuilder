@@ -58,7 +58,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
 
 			if (event.isDataFlavorSupported(TransferableActivity.activityFlavor)) {
 				event.acceptDrop(DnDConstants.ACTION_COPY);
-				System.out.println("Dropped MyDrop--drop");
+				//System.out.println("Dropped MyDrop--drop");
 				if(event.getSource() == dropTarget){
 					
 					m.addActivity(activity, dp.getDay(), dp.getDay().activities.size());
