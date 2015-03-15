@@ -103,6 +103,7 @@ public class Day extends Observable {
 		activities.add(newPosition,act);
 		setChanged();
 		notifyObservers("ActivityMoved");
+		System.out.println("ActivityMoved");
 	}
 		
 

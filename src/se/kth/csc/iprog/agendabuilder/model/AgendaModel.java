@@ -82,8 +82,12 @@ public class AgendaModel extends Observable {
 	 * and newday to first day instance
 	 */
 	public void moveActivity(Day oldday, int oldposition, Day newday, int newposition) {
+
+		
 		if(oldday != null && oldday == newday) {
 			oldday.moveActivity(oldposition,newposition);
+			setChanged();
+			notifyObservers("ActivityMoved");
 		} else if(oldday == null && newday != null) {
 			Activity act = removeParkedActivity(oldposition);
 			newday.addActivity(act,newposition);
@@ -94,8 +98,8 @@ public class AgendaModel extends Observable {
 			Activity activity = oldday.removeActivity(oldposition);
 			newday.addActivity(activity,newposition);
 		}
-		setChanged();
-		notifyObservers();
+		//setChanged();
+		//notifyObservers();
 	};
 	
 	public List<Activity> getParkedActivites(){

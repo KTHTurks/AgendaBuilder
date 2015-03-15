@@ -143,8 +143,10 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg.equals("ActivityAdded") || arg.equals("ActivityRemoved") )
+
+		if(arg.equals("ActivityAdded") || arg.equals("ActivityRemoved") || arg.equals("ActivityMoved") )
 		{
+
 			remove(scrollPane);
 			panel.removeAll();
 			//panel.setPreferredSize(new Dimension(257,330));
