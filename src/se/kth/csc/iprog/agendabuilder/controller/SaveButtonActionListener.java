@@ -37,6 +37,7 @@ public class SaveButtonActionListener implements ActionListener{
 			Activity activity = new Activity(name,description,length,type);
 			
 			model.addParkedActivity(activity);
+			frame.dispose();
 		}
 	}
 }
