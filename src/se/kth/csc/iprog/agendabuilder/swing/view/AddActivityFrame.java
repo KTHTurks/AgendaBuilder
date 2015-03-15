@@ -19,6 +19,8 @@ import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.TextFieldListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -66,6 +68,13 @@ public class AddActivityFrame extends JFrame {
 		getContentPane().add(textArea);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });    
 		btnCancel.setBounds(40, 281, 101, 29);
 		getContentPane().add(btnCancel);
 		
