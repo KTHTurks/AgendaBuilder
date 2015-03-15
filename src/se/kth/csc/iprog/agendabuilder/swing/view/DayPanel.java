@@ -143,8 +143,6 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				time.setMinutes(min + time.getMinutes());
 			}
 			
-			
-			
 				
 			endTime.setText(time.toString().substring(0, 5));
 			lengthLabel.setText(length + "  min");
@@ -157,27 +155,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			timeColor();
 		
 		
-		}/*
-		if(arg.equals("ActivityRemoved")){
-			boolean exists;
-			Component remove = null;
-			for(Component c : panel.getComponents())
-			{	
-				exists = false;
-				if(c instanceof ActivityDisplay){
-					for(Activity a : day.activities){
-						if(((ActivityDisplay)c).getID() == a.getID()){
-							exists = true;
-							break;
-						}
-					}
-					if(!exists){
-						c.setVisible(false);
-						panel.remove(c);
-					}
-				}
-			}	
-		}*/
+		}
+		
 	}
 	
 	public void timeColor()
