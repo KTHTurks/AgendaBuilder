@@ -122,6 +122,8 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			dropListener.startDropListen();
 			Activity b = null ;
 			
+			time = new Time(25200000);
+			length = 0;
 			for(Activity a : day.activities)
 			{	
 				ActivityDisplay temp = new ActivityDisplay(a);
@@ -129,10 +131,6 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
 				panel.add(temp);
 				b = a;
-			}
-			
-			
-			if(b != null){
 				int min = b.getLength();
 				length = length + min;
 				int hour = time.getHours();
@@ -143,12 +141,14 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 					time.setHours(hour);
 				}
 				time.setMinutes(min + time.getMinutes());
-				endTime.setText(time.toString().substring(0, 5));
-				lengthLabel.setText(length + "  min");
-			} else {
-				endTime.setText(textField.getText());
-				lengthLabel.setText("0 min");
 			}
+			
+			
+			
+				
+			endTime.setText(time.toString().substring(0, 5));
+			lengthLabel.setText(length + "  min");
+			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(21, 114, 257, 330);
 			add(scrollPane);
