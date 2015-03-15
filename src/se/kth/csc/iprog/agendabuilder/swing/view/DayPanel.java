@@ -90,29 +90,23 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		
 		colorPanel = new JPanel();
 		colorPanel.setBounds(195, 25, 100, 80);
-		//colorPanel.setBackground(MainView.background);
 		colorPanel.setLayout(null);
 		add(colorPanel);
 		
 		colorP_Type1 = new JPanel();
 		colorP_Type1.setBackground(ActivityDisplay.colorType1);
-		//colorType1.setVisible(false);
-		//colorType1.setBounds(0, 0, 30, 30);
 		colorPanel.add(colorP_Type1);
 		
 		colorP_Type2 = new JPanel();
 		colorP_Type2.setBackground(ActivityDisplay.colorType2);
-		//colorType2.setVisible(false);
 		colorPanel.add(colorP_Type2);
 		
 		colorP_Type3 = new JPanel();
 		colorP_Type3.setBackground(ActivityDisplay.colorType3);
-		//colorType3.setVisible(false);
 		colorPanel.add(colorP_Type3);
 		
 		colorP_Type4 = new JPanel();
 		colorP_Type4.setBackground(ActivityDisplay.colorType4);
-		//colorType4.setVisible(false);
 		colorPanel.add(colorP_Type4);
 		
 		
@@ -221,9 +215,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				timeType4 += a.getLength();
 			}
 		}
-		System.out.println(" Type1 time " + timeType1+ " Type2 time " + timeType2+ " Type3 time " + timeType3+ " Type4 time " + timeType4 );
 		double sum = timeType1 + timeType2 + timeType3 + timeType4 ;
-		System.out.println("----sum " + sum + " coloePanel height " + colorPanel.getHeight());
 		if(sum >0){
 			timeType1 = (timeType1/sum) * colorPanel.getHeight();
 			timeType2 = (timeType2/sum) * colorPanel.getHeight();
@@ -231,7 +223,6 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			timeType4 = (timeType4/sum) * colorPanel.getHeight();
 		}
 		
-		System.out.println("******* Type1 time " + timeType1+ " Type2 time " + timeType2+ " Type3 time " + timeType3+ " Type4 time " + timeType4 );
 		int width = colorPanel.getWidth();
 		
 		colorP_Type1.setBounds(0, 0, width, (int)timeType1);
