@@ -186,9 +186,9 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				ActivityDisplay temp = new ActivityDisplay(a);
 				DragSource ds = new DragSource();
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-				panel.add(temp);
-				b = a;
+				b=a;
 				int min = b.getLength();
+				Time startTime = new Time(time.getTime());
 				length = length + min;
 				int hour = time.getHours();
 				if(min + time.getMinutes()>=60)
@@ -198,8 +198,9 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 					time.setHours(hour);
 				}
 				time.setMinutes(min + time.getMinutes());
+				temp.changeDayMod(startTime.toString().substring(0, 5), time.toString().substring(0, 5));
+				panel.add(temp);
 			}
-			
 				
 			endTime.setText(time.toString().substring(0, 5));
 			lengthLabel.setText(length + "  min");
