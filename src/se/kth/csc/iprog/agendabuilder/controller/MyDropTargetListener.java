@@ -61,6 +61,8 @@ public class MyDropTargetListener extends DropTargetAdapter {
 				if(event.getSource() == dropTarget){
 
 					int pos = (MouseInfo.getPointerInfo().getLocation().y - 114) / 52;
+					if(pos > dp.getDay().activities.size())
+						pos = dp.getDay().activities.size();
 					if(dp.getDay().activities.contains(activity))
 						m.moveActivity(dp.getDay(), dp.getDay().activities.indexOf(activity), dp.getDay(), pos);
 					else

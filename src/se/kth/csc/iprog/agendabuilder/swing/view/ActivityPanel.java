@@ -125,27 +125,24 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			this.remove(activityScrollPane);
 			if(arg instanceof ArrayList )
 				activities = ((ArrayList<Activity>) arg);
-			int heigth = activities.size()*44;
-			int row = activities.size();
-			panel.setPreferredSize(new Dimension(237,heigth));
+			int height = activities.size()*52;
+			height = Math.max(389,height);
+			panel.setPreferredSize(new Dimension(237,height));
+			panel.setLayout(null);
 			dropListener.startDropListen();
-			if(row == 0)
-				row = 1;
-			panel.setLayout(new GridLayout(row,heigth,0,0));
 
+			int i=0;
 			for(Activity a : activities){
 				ActivityDisplay temp = new ActivityDisplay(a);
 				DragSource ds = new DragSource();
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
 				panel.add(temp);
+				temp.setBounds(0, 52*i, 257, 50);
+				i++;
 			}
 
 			activityScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			int height = activities.size()*52;
-			height = Math.min(399,height);
-			if(height == 0)
-				height = 399;
-			activityScrollPane.setBounds(22, 57, 257, height);
+			activityScrollPane.setBounds(22, 57, 257, 399);
 			add(activityScrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);

@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -106,10 +107,10 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setPreferredSize(new Dimension(257, 10));
+		panel.setPreferredSize(new Dimension(257, 320));
 		
 		scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
 		scrollPane.setBounds(21, 114, 257, 330);
 		add(scrollPane);
 		
@@ -171,8 +172,10 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		{
 			remove(scrollPane);
 			panel.removeAll();
-			panel.setPreferredSize(new Dimension(257,day.activities.size()*48));
-			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
+			int height = day.activities.size()*52;
+			height = Math.max(320,height);
+			panel.setPreferredSize(new Dimension(257,height));
+			panel.setLayout(null);
 			dropListener = new MyDropTargetListener(dropListener);
 			dropListener.addView(this);
 			dropListener.startDropListen();
@@ -198,17 +201,14 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 				time.setMinutes(min + time.getMinutes());
 				temp.changeDayMod(startTime.toString().substring(0, 5), time.toString().substring(0, 5));
 				panel.add(temp);
+				temp.setBounds(0, 52*i, 257, 50);
 			}
 				
 			endTime.setText(time.toString().substring(0, 5));
 			lengthLabel.setText(length + "  min");
 			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			int height = day.activities.size()*52;
-			height = Math.min(330,height);
-			if(height == 0)
-				height = 330;
-			scrollPane.setBounds(21, 114, 257, height);
+			scrollPane.setBounds(21, 114, 257, 330);
 			add(scrollPane);
 			AgendaBuilder.agendaBuilder.pack();
 			AgendaBuilder.agendaBuilder.setVisible(true);
