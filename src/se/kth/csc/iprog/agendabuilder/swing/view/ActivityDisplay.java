@@ -16,7 +16,6 @@ public class ActivityDisplay extends JPanel {
 	private int id;
 	JLabel lengthLabel;
 	JLabel startTimeLabel;
-	JLabel endTimeLabel;
 	public static final  Color colorType1 = new Color(173, 216, 230);
 	public static final  Color colorType2 = new Color(255, 228, 225);
 	public static final  Color colorType3 = new Color(255, 248, 220);
@@ -56,16 +55,11 @@ public class ActivityDisplay extends JPanel {
 		add(lengthLabel);
 		
 		startTimeLabel = new JLabel();
-		startTimeLabel.setBounds(10, 7, 34, 16);
+		startTimeLabel.setBounds(10, 15, 46, 16);
 		startTimeLabel.setName(Integer.toString(id));
 		startTimeLabel.setVisible(false);
 		add(startTimeLabel);
 		
-		endTimeLabel = new JLabel();
-		endTimeLabel.setBounds(10, 24, 34, 16);
-		endTimeLabel.setName(Integer.toString(id));
-		endTimeLabel.setVisible(false);
-		add(endTimeLabel);
 		
 		setBounds(62, 0, 255, 44);
 		
@@ -79,15 +73,12 @@ public class ActivityDisplay extends JPanel {
 	public void changeDayMod(String sTime, String eTime){
 		lengthLabel.setVisible(false);
 		startTimeLabel.setVisible(true);
-		endTimeLabel.setVisible(true);
 		startTimeLabel.setText(sTime);
-		endTimeLabel.setText(eTime);
 	}
 	
 	public void changeParkedMod(){
 		lengthLabel.setVisible(true);
 		startTimeLabel.setVisible(false);
-		endTimeLabel.setVisible(false);
 	}
 	
 	
