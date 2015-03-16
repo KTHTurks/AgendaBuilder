@@ -22,7 +22,7 @@ public class NewDayButtonActionListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		dp.addDay(model.addDay(8, 10));
+		dp.addDay(model.addDay(8, 0));
 	}
 
 }

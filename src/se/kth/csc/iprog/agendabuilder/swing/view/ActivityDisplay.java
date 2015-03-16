@@ -70,7 +70,7 @@ public class ActivityDisplay extends JPanel {
 		return activity;
 	}
 	
-	public void changeDayMod(String sTime, String eTime){
+	public void changeDayMod(String sTime){
 		lengthLabel.setVisible(false);
 		startTimeLabel.setVisible(true);
 		startTimeLabel.setText(sTime);

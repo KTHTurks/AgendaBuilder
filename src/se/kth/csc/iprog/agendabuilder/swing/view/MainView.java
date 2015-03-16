@@ -8,6 +8,7 @@ import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewActivityButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
 import se.kth.csc.iprog.agendabuilder.controller.SaveButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.StartTimeListener;
 import se.kth.csc.iprog.agendabuilder.controller.TextFieldListener;
 import se.kth.csc.iprog.agendabuilder.model.AgendaModel;
 
@@ -35,6 +36,7 @@ public class MainView extends JPanel {
 		NewActivityButtonActionListener ab = new NewActivityButtonActionListener(sb, tf);
 		NewDayButtonActionListener db = new NewDayButtonActionListener();
 		MyDropTargetListener myDrop = new MyDropTargetListener();
+		StartTimeListener sl = new StartTimeListener();
 		
 		myDrop.addModel(model);
 		dp.addDropListener(myDrop);
@@ -46,11 +48,14 @@ public class MainView extends JPanel {
 		db.addView(dp);
 		dp.addNewDayListener(db);
 		
+		sl.addModel(model);
+		dp.addStartTimeListener(sl);
+		
 		
 		//Adding the first day
 		
 		ap.addDropListener(myDrop);
-		dp.addDay(model.addDay(8, 10));
+		dp.addDay(model.addDay(8, 0));
 		
 	}
 }

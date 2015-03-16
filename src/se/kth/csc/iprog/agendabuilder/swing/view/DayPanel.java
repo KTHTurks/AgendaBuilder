@@ -13,6 +13,7 @@ import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
 import se.kth.csc.iprog.agendabuilder.swing.view.ActivityPanel.TransferableActivity;
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
+import se.kth.csc.iprog.agendabuilder.controller.StartTimeListener;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -70,32 +71,7 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		textField.setBounds(139, 24, 51, 28);
 		add(textField);
 		textField.setColumns(10);
-		
-		textField.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				if(Integer.parseInt(textField.getText().substring(0, 2)) <= 24 
-						&& Integer.parseInt(textField.getText().substring(0, 2)) >= 00
-						&& Integer.parseInt(textField.getText().substring(3, 5)) <= 60
-						&& Integer.parseInt(textField.getText().substring(3, 5)) >= 00)
-				{
-					textField.setText(textField.getText());
-					int minDiff = time.getMinutes() - t.getMinutes();
-					int hourDiff = time.getHours() - t.getHours();
-					t.setHours(Integer.parseInt(textField.getText().substring(0, 2)));
-					t.setMinutes(Integer.parseInt(textField.getText().substring(3, 5)));
-					time.setHours(t.getHours() + hourDiff);
-					time.setMinutes(t.getMinutes() + minDiff);
-					endTime.setText(time.toString().substring(0, 5));
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null,"Time must be valid");
-				}
-			}
-		});
-		
+	
 		endTime = new JLabel(time.toString().substring(0, 5));
 		endTime.setBounds(146, 58, 61, 16);
 		add(endTime);
@@ -152,6 +128,10 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		dropListener.startDropListen();
 	}
 	
+	public void addStartTimeListener(StartTimeListener sl){
+		textField.addActionListener(sl);
+	}
+	
 	public void dragGestureRecognized(DragGestureEvent event) {
 
 		Cursor cursor = null;
@@ -179,33 +159,39 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			dropListener = new MyDropTargetListener(dropListener);
 			dropListener.addView(this);
 			dropListener.startDropListen();
-			Activity b = null ;
+			Activity act = null ;
 			
-			time = new Time(25200000);
 			length = 0;
+			int start = day.getStart();
 			for(int i=0; i<day.activities.size(); i++){
 				ActivityDisplay temp = new ActivityDisplay(day.activities.get(i));
 				DragSource ds = new DragSource();
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-				b=day.activities.get(i);
-				int min = b.getLength();
-				Time startTime = new Time(time.getTime());
-				length = length + min;
-				int hour = time.getHours();
-				if(min + time.getMinutes()>=60)
-				{
-					min = min - 60;
-					hour = hour + 1;
-					time.setHours(hour);
-				}
-				time.setMinutes(min + time.getMinutes());
-				temp.changeDayMod(startTime.toString().substring(0, 5), time.toString().substring(0, 5));
+				act=day.activities.get(i);
+				String startHour = ""+start/60;
+				if(start/60 < 10)
+					startHour = "0"+start/60;
+				String startMin = ""+start%60;
+				if(start%60 < 10)
+					startMin = "0"+start%60;
+				
+				temp.changeDayMod(startHour+":"+startMin);
 				panel.add(temp);
 				temp.setBounds(0, 52*i, 257, 50);
+
+				length = act.getLength();
+				start += length;
 			}
+			int end = start;
+			String startHour = ""+start/60;
+			if(start/60 < 10)
+				startHour = "0"+start/60;
+			String startMin = ""+start%60;
+			if(start%60 < 10)
+				startMin = "0"+start%60;
 				
-			endTime.setText(time.toString().substring(0, 5));
-			lengthLabel.setText(length + "  min");
+			endTime.setText(startHour + ":" + startMin);
+			lengthLabel.setText(end-day.getStart() + "  min");
 			
 			scrollPane = new JScrollPane(panel,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(21, 114, 257, 330);
@@ -264,5 +250,13 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 		colorP_Type3.setVisible((timeType3 > 0));
 		colorP_Type4.setVisible((timeType4 > 0));
 		
+	}
+	
+	public JTextField getTextField(){
+		return textField;
+	}
+	
+	public void setEndTime(String time){
+		endTime.setText(time);
 	}
 }

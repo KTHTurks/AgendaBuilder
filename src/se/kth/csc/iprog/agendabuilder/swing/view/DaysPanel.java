@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 
 import se.kth.csc.iprog.agendabuilder.controller.MyDropTargetListener;
 import se.kth.csc.iprog.agendabuilder.controller.NewDayButtonActionListener;
+import se.kth.csc.iprog.agendabuilder.controller.StartTimeListener;
 import se.kth.csc.iprog.agendabuilder.model.Activity;
 import se.kth.csc.iprog.agendabuilder.model.Day;
 import se.kth.csc.iprog.agendabuilder.swing.AgendaBuilder;
@@ -33,6 +34,7 @@ public class DaysPanel extends JPanel implements Observer {
 	JPanel panel;
 	JButton btnNewButton;
 	MyDropTargetListener mydrop;
+	StartTimeListener sl;
 	
 	public DaysPanel() {
 		setLayout(null);
@@ -57,6 +59,8 @@ public class DaysPanel extends JPanel implements Observer {
 		MyDropTargetListener tempList= new MyDropTargetListener(mydrop);
 		tempList.addView(temp);
 		temp.addDropListener(tempList);
+		temp.addStartTimeListener(sl);
+		sl.addView(temp);
 		
 		days.add(temp);
 		
@@ -69,8 +73,6 @@ public class DaysPanel extends JPanel implements Observer {
 		
 		for(DayPanel p : days){
 			temp = p;
-			DragSource ds = new DragSource();
-	        //ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
 			tempList= new MyDropTargetListener(mydrop);
 			tempList.addView(temp);
 			temp.addDropListener(tempList);
@@ -98,7 +100,11 @@ public class DaysPanel extends JPanel implements Observer {
 		this.mydrop = mydrop;
 		
 	}
-
+	
+	public void addStartTimeListener(StartTimeListener sl){
+		this.sl = sl;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
