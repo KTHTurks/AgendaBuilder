@@ -167,13 +167,10 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 	
 	@Override
 	public void update(Observable o, Object arg) {
-
 		if(arg.equals("ActivityAdded") || arg.equals("ActivityRemoved") || arg.equals("ActivityMoved") )
 		{
-
 			remove(scrollPane);
 			panel.removeAll();
-			//panel.setPreferredSize(new Dimension(257,330));
 			panel.setPreferredSize(new Dimension(257,day.activities.size()*48));
 			panel.setLayout(new GridLayout(day.activities.size(),1,0,0));
 			dropListener = new MyDropTargetListener(dropListener);
@@ -183,12 +180,11 @@ public class DayPanel extends JPanel implements DragGestureListener, java.util.O
 			
 			time = new Time(25200000);
 			length = 0;
-			for(Activity a : day.activities)
-			{	
-				ActivityDisplay temp = new ActivityDisplay(a);
+			for(int i=0; i<day.activities.size(); i++){
+				ActivityDisplay temp = new ActivityDisplay(day.activities.get(i));
 				DragSource ds = new DragSource();
 				ds.createDefaultDragGestureRecognizer((JPanel)temp,DnDConstants.ACTION_COPY, this);
-				b=a;
+				b=day.activities.get(i);
 				int min = b.getLength();
 				Time startTime = new Time(time.getTime());
 				length = length + min;

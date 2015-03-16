@@ -56,14 +56,11 @@ public class MyDropTargetListener extends DropTargetAdapter {
 
 			Transferable tr = event.getTransferable();
 			Activity activity = (Activity) tr.getTransferData(TransferableActivity.activityFlavor);
-			System.out.println(MouseInfo.getPointerInfo().getLocation());
 			if (event.isDataFlavorSupported(TransferableActivity.activityFlavor)) {
 				event.acceptDrop(DnDConstants.ACTION_COPY);
-				//System.out.println("Dropped MyDrop--drop");
 				if(event.getSource() == dropTarget){
 
 					int pos = (MouseInfo.getPointerInfo().getLocation().y - 114) / 52;
-					System.out.println("postion  " + pos);
 					if(dp.getDay().activities.contains(activity))
 						m.moveActivity(dp.getDay(), dp.getDay().activities.indexOf(activity), dp.getDay(), pos);
 					else

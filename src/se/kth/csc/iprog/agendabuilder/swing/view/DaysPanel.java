@@ -102,7 +102,6 @@ public class DaysPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
 		if(arg instanceof Day){
 			for(DayPanel dPanel : days){
 				if(((Day)arg).getID() == dPanel.getDay().getID()){
@@ -113,6 +112,11 @@ public class DaysPanel extends JPanel implements Observer {
 		}else if((arg.toString().equals("ActivityRemoved"))){
 			for(DayPanel dPanel : days){
 				dPanel.update(null, "ActivityRemoved");
+			}
+		}
+		else if(arg.toString().equals("ActivityMoved")){
+			for(DayPanel dPanel : days){
+				dPanel.update(null, "ActivityMoved");
 			}
 		}
 		

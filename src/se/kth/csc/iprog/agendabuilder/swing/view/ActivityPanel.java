@@ -118,9 +118,6 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		//System.out.println(arg.getClass().toString());
-		//if(arg.equals("ActivityParked"))
 		if(arg instanceof ArrayList || arg instanceof Activity)
 		{
 			remove(activityScrollPane);
@@ -146,6 +143,8 @@ public class ActivityPanel extends JPanel implements DragGestureListener, java.u
 			activityScrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			int height = activities.size()*52;
 			height = Math.min(399,height);
+			if(height == 0)
+				height = 399;
 			activityScrollPane.setBounds(22, 57, 257, height);
 			add(activityScrollPane);
 			AgendaBuilder.agendaBuilder.pack();
